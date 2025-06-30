@@ -15,7 +15,6 @@ interface ComicData {
 
 interface ComicGridProps {
   comics: ComicData[]
-  onBuy?: (comicId: string) => void
 }
 
 export function ComicGrid({ comics, onBuy }: ComicGridProps) {

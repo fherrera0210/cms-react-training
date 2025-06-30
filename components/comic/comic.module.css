@@ -22,6 +22,22 @@
   object-fit: cover;
 }
 
+.detail {
+  display: flex;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.label {
+  color: #888;
+  font-weight: 500;
+}
+
+.value {
+  color: #333;
+  font-weight: 600;
+}
+
 .button {
   position: absolute;
   bottom: -20px;

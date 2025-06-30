@@ -3,6 +3,8 @@
 import Image from "next/image"
 import { Zap } from "lucide-react"
 import styles from "./comic.module.css"
+import { ComicButton } from "./comic-button"
+import { ComicDetail } from "./comic-detail"
 
 interface ComicProps {
   title: string
@@ -11,10 +13,16 @@ interface ComicProps {
   issue: number
   description: string
   publishDate: string
-  onBuy?: () => void
 }
 
-export function Comic({ title, coverImage, author, issue, description, publishDate, onBuy }: ComicProps) {
+export function Comic({ 
+  title, 
+  coverImage, 
+  author, 
+  issue, 
+  description, 
+  publishDate, 
+}: ComicProps) {
   return (
     <div className={styles.comic}>
       <div className={styles.cover}>
@@ -25,17 +33,17 @@ export function Comic({ title, coverImage, author, issue, description, publishDa
           height={450}
           className={styles.image}
         />
-        <button className={styles.button} onClick={onBuy}>
+        <ComicButton>
           <Zap size={16} />
-        </button>
+        </ComicButton>
       </div>
 
       <div className={styles.content}>
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.meta}>
-          {issue > 0 && <span><b>Issue</b> #{issue}</span>}
-          <span><b>Creator:</b> {author}</span>
-          <span><b>Published:</b> {publishDate}</span>
+          <ComicDetail label="Issue" value={issue} />
+          <ComicDetail label="Creator" value={author} />
+          <ComicDetail label="Published" value={publishDate} />
         </div>
         <p className={styles.description}>{description}</p>
       </div>

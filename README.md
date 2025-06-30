@@ -1,85 +1,36 @@
-# cms-react-training
-******
-# 1 Exercise: Your First Components
-Create a repo in GitHub named “cms-react-training” under your own account. This repo will be used for all the exercises in the coursework as well as the final project at the end. To keep things manageable, each exercise and the final project should each be in their own branch on this repo. For now, you only need to make one (1) branch: the one for this exercise and should be named “exercise-1”.
-In your new repo, build a NextJS app.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Build a Comic component.
-Styling must be done with Next’s built-in CSS Modules system.
-Images must be loaded via Next/Image. (https://nextjs.org/docs/pages/api-reference/components/image)
-Must include sub-components for Button as well as a Detail.
-Iterate over the array of comics in the Static Data and render a Comic for each one.
-Comics should be displayed in a responsive grid.
-Use inline styles via the style attribute on the element wrapping the comics. It should only take ~3 lines of CSS to create a rudimentary responsive grid.
+## Getting Started
 
-******
-# 2 Exercise: Working With An API
-Create a new branch in your repo named “exercise-2”. This branch should be based on “exercise-1”.
-Create a custom hook for the Marvel API. (https://comicvine.gamespot.com/api/)
-Your hook must support handling the loading, success, and error states of the API.
-Update your grid of comics to be powered by your new hook instead of the Static Data.
+First, run the development server:
 
-******
-# 3 Exercise: Type It Up
-Create a new branch in your repo named “exercise-3”. This branch should be based on “exercise-2”.
-Put NextJS in TypeScript mode. (https://nextjs.org/docs/app/api-reference/config/typescript#existing-projects)
-Convert all your components and hooks from .js files to .tsx files.
-Define types or interfaces for all props for each component/hook as well as address any TypeScript errors that may have appeared.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-******
-# 4 Exercise: Your First Test
-Create a new branch named “exercise-4”. This branch should be based on “exercise-3”.
-Add Jest and the React Testing Library to your project.
-Create a test that validates that the Comic component accurately renders the title, issue number, published date, and creator names.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-******
-# Final Project
-Create a new branch in your repo named “final-project”. This branch should be based on “exercise-4”.
-Taking everything you’ve learned and built up until now, build out everything else in the Design Comps. (there are multiple pages)
-When you’ve finished your final project, send your repo to your lead for review. You may need to update the permissions on your repo to allow your lead to view your work.
-***
-# Final Project Criteria
-All images must be loaded via the Next/Image component.
-You will need to update your Marvel API hook to support filters and pagination.
-The pagination must be full functional
-It should reset when you choose an item from the filters
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Character filter options:
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Iron Man: 1009368
+## Learn More
 
-Captain America: 1009220
+To learn more about Next.js, take a look at the following resources:
 
-Thor: 1009664
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Deadpool: 1009268
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Scarlet Witch: 1009562
+## Deploy on Vercel
 
-Black Widow: 1009189
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Wasp: 1009707
-
-Gamora: 1010763
-
-Creator filter options:
-
-Kate Leth: 12787
-
-Brian Michael Bendis: 24
-
-Stan Lee: 30
-
-Steve Ditko: 32
-
-Jack Kirby: 196
-
-You must be able to add and remove comics from a favorites list.
-An accurate count of favorites must show in the header.
-The favorites sidebar should always be accurate and the close button should work
-Once clicked, favorite buttons should become unfavorite buttons.
-Favorites should be limited to no more than 10 comics. Once that limit is reached all favorite buttons should become disabled until a comic is removed from the favorites list.
-Favorites should be stored in LocalStorage so selections persist after a page reload.
-The app must be responsive. (There are mobile comps in the XD file)
-The app should follow best practices around semantics and accessibility.
-The app must match the Design Comp visually.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
