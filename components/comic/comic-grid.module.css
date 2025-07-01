@@ -89,7 +89,6 @@
   line-height: 1.5;
 }
 
-/* Responsive breakpoints */
 @media (max-width: 1200px) {
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
