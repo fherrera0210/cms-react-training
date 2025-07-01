@@ -11,8 +11,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata = {
-  title: "Comic Collection",
-  description: "Discover amazing stories from your favorite creators",
+  title: "Viz Media Collection",
+  description: "Discover incredible manga and graphic novels from Viz Media",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({ children }) {

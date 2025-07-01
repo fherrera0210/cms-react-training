@@ -3,31 +3,39 @@
 import Image from "next/image"
 import { Zap } from "lucide-react"
 import styles from "./comic.module.css"
-import { ComicButton } from "./comic-button"
-import { ComicDetail } from "./comic-detail"
 
-export function Comic({ title, coverImage, author, issue, description, publishDate }) {
+export function Comic({ title, coverImage, author, issue, description, publishDate, publisher }) {
   return (
     <div className={styles.comic}>
       <div className={styles.cover}>
         <Image
           src={coverImage || "/placeholder.svg"}
-          alt={`${title} cover`}
+          alt={`${title} volume ${issue} cover`}
           width={300}
           height={450}
           className={styles.image}
+          unoptimized
         />
-        <ComicButton>
+        <button className={styles.button}>
           <Zap size={16} />
-        </ComicButton>
+        </button>
       </div>
 
       <div className={styles.content}>
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.meta}>
-          <ComicDetail label="Issue" value={issue} />
-          <ComicDetail label="Creator" value={author} />
-          <ComicDetail label="Published" value={publishDate} />
+          <span>
+            <b>Issue</b> #{issue}
+          </span>
+          <span>
+            <b>Author:</b> {author}
+          </span>
+          <span>
+            <b>Publisher:</b> {publisher}
+          </span>
+          <span>
+            <b>Published:</b> {publishDate}
+          </span>
         </div>
         <p className={styles.description}>{description}</p>
       </div>

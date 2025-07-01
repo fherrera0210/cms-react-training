@@ -21,9 +21,5 @@
     "@types/react-dom": "^19",
     "tailwindcss": "^4"
   },
-  "aliases": {
-    "components": "@/components",
-    "lib": "@/lib"
-  },
   "iconLibrary": "lucide"
 }
