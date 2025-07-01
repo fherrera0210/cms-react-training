@@ -3,21 +3,7 @@
 import { Comic } from "./comic"
 import styles from "./comic-grid.module.css"
 
-interface ComicData {
-  id: string
-  title: string
-  coverImage: string
-  author: string
-  issue: number
-  description: string
-  publishDate: string
-}
-
-interface ComicGridProps {
-  comics: ComicData[]
-}
-
-export function ComicGrid({ comics, onBuy }: ComicGridProps) {
+export function ComicGrid({ comics }) {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -35,7 +21,6 @@ export function ComicGrid({ comics, onBuy }: ComicGridProps) {
             issue={comic.issue}
             description={comic.description}
             publishDate={comic.publishDate}
-            onBuy={() => onBuy?.(comic.id)}
           />
         ))}
       </div>

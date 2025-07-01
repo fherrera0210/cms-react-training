@@ -1,11 +1,6 @@
 import styles from "./comic.module.css"
 
-interface ComicDetailProps {
-  label: string
-  value: string
-}
-
-export function ComicDetail({ label, value }: ComicDetailProps) {
+export function ComicDetail({ label, value }) {
   return (
     <div className={styles.detail}>
       <span className={styles.label}>{label}:</span>

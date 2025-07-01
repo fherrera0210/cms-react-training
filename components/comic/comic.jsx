@@ -6,23 +6,7 @@ import styles from "./comic.module.css"
 import { ComicButton } from "./comic-button"
 import { ComicDetail } from "./comic-detail"
 
-interface ComicProps {
-  title: string
-  coverImage: string
-  author: string
-  issue: number
-  description: string
-  publishDate: string
-}
-
-export function Comic({ 
-  title, 
-  coverImage, 
-  author, 
-  issue, 
-  description, 
-  publishDate, 
-}: ComicProps) {
+export function Comic({ title, coverImage, author, issue, description, publishDate }) {
   return (
     <div className={styles.comic}>
       <div className={styles.cover}>
