@@ -14,7 +14,7 @@
   font-size: 36px;
   font-weight: bold;
   margin: 0 0 12px 0;
-  color: #1a1a1a; /* Updated */
+  color: #1a1a1a;
 }
 
 .header p {
@@ -89,7 +89,6 @@
   line-height: 1.5;
 }
 
-/* Responsive breakpoints */
 @media (max-width: 1200px) {
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
