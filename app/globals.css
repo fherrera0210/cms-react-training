@@ -7,16 +7,14 @@
 }
 
 html {
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: system-ui, sans-serif;
   line-height: 1.6;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-feature-settings: "rlig" 1, "calt" 1;
+  font-family: system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 button {
