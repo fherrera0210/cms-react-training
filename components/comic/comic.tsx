@@ -14,14 +14,14 @@ export function Comic({ title, coverImage, author, issue, description, publishDa
     <div className={styles.comic}>
       <div className={styles.cover}>
         <Image
-          src={coverImage || "/placeholder.svg"}
+          src={coverImage || "/placeholder.svg?height=450&width=300"}
           alt={`${title} volume ${issue} cover`}
           width={300}
           height={450}
           className={styles.image}
           unoptimized
         />
-        <button className={styles.button} onClick={onBuy}>
+        <button className={styles.button} onClick={onBuy} type="button">
           <Zap size={16} />
         </button>
       </div>

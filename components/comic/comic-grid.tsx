@@ -11,6 +11,12 @@ interface ComicGridProps {
 export function ComicGrid({ onBuy }: ComicGridProps) {
   const { comics, loading, error } = useComics()
 
+  const handleBuy = (comicId: string) => {
+    if (onBuy) {
+      onBuy(comicId)
+    }
+  }
+
   if (loading) {
     return (
       <div className={styles.container}>
@@ -69,7 +75,7 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
 
       <div className={styles.grid}>
         {comics.map((comic) => (
-          <Comic key={comic.id} {...comic} onBuy={() => onBuy?.(comic.id)} />
+          <Comic key={comic.id} {...comic} onBuy={() => handleBuy(comic.id)} />
         ))}
       </div>
     </div>

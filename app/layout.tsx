@@ -1,10 +1,11 @@
 import type React from "react"
+import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import "./globals.css"
 
 const geist = Geist({ subsets: ["latin"] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Viz Media Collection",
   description: "Discover incredible manga from Viz Media",
     generator: 'v0.dev'
