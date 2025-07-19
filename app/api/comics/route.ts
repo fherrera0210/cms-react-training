@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import type { OpenLibraryBook, ApiResponse } from "@/types/comic"
+import type { OpenLibraryBook, ApiResponse } from "../../../types/comic"
 
 const OPEN_LIBRARY_BASE_URL = "https://openlibrary.org"
 

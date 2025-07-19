@@ -1,7 +1,7 @@
 "use client"
 
 import { Comic } from "./comic"
-import { useComics } from "@/hooks/use-comics"
+import { useComics } from "../../hooks/use-comics"
 import styles from "./comic-grid.module.css"
 
 interface ComicGridProps {

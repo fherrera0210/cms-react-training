@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { Zap } from "lucide-react"
-import type { Comic as ComicType } from "@/types/comic"
+import type { Comic as ComicType } from "../../types/comic"
 import styles from "./comic.module.css"
 
 interface ComicProps extends ComicType {

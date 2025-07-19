@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import type { Comic, OpenLibraryBook, ApiResponse } from "@/types/comic"
+import type { Comic, OpenLibraryBook, ApiResponse } from "../types/comic"
 
 interface UseComicsReturn {
   comics: Comic[]

@@ -1,4 +1,6 @@
-import { ComicGrid } from "@/components/comic/comic-grid"
+"use client"
+
+import { ComicGrid } from "../components/comic/comic-grid"
 
 export default function HomePage() {
   const handleBuy = (comicId: string) => {
