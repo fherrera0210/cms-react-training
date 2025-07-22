@@ -17,7 +17,6 @@ interface UseComicsReturn {
 
 const ITEMS_PER_PAGE = 12
 
-// Default pagination
 const DEFAULT_PAGINATION: PaginationInfo = {
   currentPage: 1,
   totalPages: 1,
@@ -45,7 +44,7 @@ export function useComics(): UseComicsReturn {
 
   const transformData = (books: OpenLibraryBook[]): Comic[] => {
     return books.map((book, index) => {
-      // Clean title
+
       const cleanTitle =
         book.title
           ?.replace(/,?\s*vol\.?\s*\d+/i, "")
@@ -114,7 +113,7 @@ export function useComics(): UseComicsReturn {
     })
   }
 
-  // Filter comics based on current filters
+  // Current filters
   const applyFilters = useCallback(() => {
     let filtered = allComics
 
@@ -131,16 +130,14 @@ export function useComics(): UseComicsReturn {
     }
 
     setFilteredComics(filtered)
-    setCurrentPage(1) // Reset to first page when filters change
+    setCurrentPage(1) 
   }, [allComics, filters])
 
-  // Apply pagination to filtered comics
   const applyPagination = useCallback(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
     const endIndex = startIndex + ITEMS_PER_PAGE
     setDisplayedComics(filteredComics.slice(startIndex, endIndex))
 
-    // Update pagination info
     setPagination({
       currentPage,
       totalPages: Math.max(1, Math.ceil(filteredComics.length / ITEMS_PER_PAGE)),
@@ -173,7 +170,7 @@ export function useComics(): UseComicsReturn {
           setAllComics(transformedComics)
           setFilteredComics(transformedComics)
         } else {
-          setError("No Viz Media comics found.")
+          setError("No titles found.")
         }
       } catch (err) {
         setError("Failed to load comics.")
@@ -185,14 +182,12 @@ export function useComics(): UseComicsReturn {
     fetchComics()
   }, [])
 
-  // Apply filters when allComics or filters change
   useEffect(() => {
     if (allComics.length > 0) {
       applyFilters()
     }
   }, [allComics, filters, applyFilters])
 
-  // Apply pagination when filteredComics or currentPage changes
   useEffect(() => {
     applyPagination()
   }, [filteredComics, currentPage, applyPagination])

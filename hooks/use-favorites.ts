@@ -32,7 +32,7 @@ export function useFavorites(): UseFavoritesReturn {
         setFavoriteIds(new Set(parsedFavorites.map((fav) => fav.id)))
       }
     } catch (error) {
-      console.error("Error loading favorites from localStorage:", error)
+      console.error("Error loading favorites from local:", error)
     }
   }, [])
 
@@ -41,7 +41,7 @@ export function useFavorites(): UseFavoritesReturn {
     try {
       localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites))
     } catch (error) {
-      console.error("Error saving favorites to localStorage:", error)
+      console.error("Error saving favorites to local:", error)
     }
   }, [favorites])
 
