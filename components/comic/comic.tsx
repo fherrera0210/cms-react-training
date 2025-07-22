@@ -1,15 +1,28 @@
 "use client"
 
 import Image from "next/image"
-import { Zap } from "lucide-react"
+import { Heart } from "lucide-react"
 import type { Comic as ComicType } from "../../types/comic"
 import styles from "./comic.module.css"
 
 interface ComicProps extends ComicType {
-  onBuy: () => void
+  onToggleFavorite: () => void
+  isFavorite: boolean
+  isDisabled: boolean
 }
 
-export function Comic({ title, coverImage, author, issue, description, publishDate, publisher, onBuy }: ComicProps) {
+export function Comic({
+  title,
+  coverImage,
+  author,
+  issue,
+  description,
+  publishDate,
+  publisher,
+  onToggleFavorite,
+  isFavorite,
+  isDisabled,
+}: ComicProps) {
   return (
     <div className={styles.comic}>
       <div className={styles.cover}>
@@ -21,8 +34,14 @@ export function Comic({ title, coverImage, author, issue, description, publishDa
           className={styles.image}
           unoptimized
         />
-        <button className={styles.button} onClick={onBuy} type="button">
-          <Zap size={16} />
+        <button
+          className={`${styles.button} ${isFavorite ? styles.favorited : ""} ${isDisabled ? styles.disabled : ""}`}
+          onClick={onToggleFavorite}
+          type="button"
+          disabled={isDisabled}
+          aria-label={isFavorite ? `Remove ${title} from favorites` : `Add ${title} to favorites`}
+        >
+          <Heart size={16} fill={isFavorite ? "currentColor" : "none"} />
         </button>
       </div>
 

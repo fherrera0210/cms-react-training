@@ -1,22 +1,51 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import type { Comic, OpenLibraryBook, ApiResponse } from "../types/comic"
+import { useState, useEffect, useCallback } from "react"
+import type { Comic, OpenLibraryBook, ApiResponse, FilterOptions, PaginationInfo } from "../types/comic"
 
 interface UseComicsReturn {
   comics: Comic[]
   loading: boolean
   error: string | null
+  pagination: PaginationInfo
+  filters: FilterOptions
+  availableCharacters: string[]
+  availableCreators: string[]
+  handleFilterChange: (newFilters: FilterOptions) => void
+  handlePageChange: (page: number) => void
+}
+
+const ITEMS_PER_PAGE = 12
+
+// Default pagination
+const DEFAULT_PAGINATION: PaginationInfo = {
+  currentPage: 1,
+  totalPages: 1,
+  itemsPerPage: ITEMS_PER_PAGE,
+  totalItems: 0,
 }
 
 export function useComics(): UseComicsReturn {
-  const [comics, setComics] = useState<Comic[]>([])
+  const [allComics, setAllComics] = useState<Comic[]>([])
+  const [filteredComics, setFilteredComics] = useState<Comic[]>([])
+  const [displayedComics, setDisplayedComics] = useState<Comic[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [filters, setFilters] = useState<FilterOptions>({ character: "", creator: "" })
+  const [pagination, setPagination] = useState<PaginationInfo>(DEFAULT_PAGINATION)
+
+  const availableCharacters = Array.from(
+    new Set(allComics.flatMap((comic) => comic.characters || []).filter(Boolean)),
+  ).sort()
+
+  const availableCreators = Array.from(
+    new Set(allComics.flatMap((comic) => comic.creators || []).filter(Boolean)),
+  ).sort()
 
   const transformData = (books: OpenLibraryBook[]): Comic[] => {
     return books.map((book, index) => {
-      
+      // Clean title
       const cleanTitle =
         book.title
           ?.replace(/,?\s*vol\.?\s*\d+/i, "")
@@ -38,6 +67,38 @@ export function useComics(): UseComicsReturn {
       const publisher =
         book.publisher?.find((pub) => pub.toLowerCase().includes("viz")) || book.publisher?.[0] || "Unknown Publisher"
 
+      const titleLower = cleanTitle.toLowerCase()
+      const subjectsLower = (book.subject || []).map((s) => s.toLowerCase()).join(" ")
+      const searchText = `${titleLower} ${subjectsLower}`
+
+      const characters: string[] = []
+
+      // Popular manga characters
+      const characterMap = {
+        "Naruto Uzumaki": ["naruto", "uzumaki"],
+        "Monkey D. Luffy": ["luffy", "one piece", "monkey d"],
+        "Son Goku": ["goku", "dragon ball", "son goku"],
+        "Ichigo Kurosaki": ["ichigo", "bleach", "kurosaki"],
+        "Light Yagami": ["light yagami", "death note", "kira"],
+        "Edward Elric": ["edward elric", "fullmetal alchemist", "elric"],
+        "Eren Yeager": ["eren", "attack on titan", "yeager", "jaeger"],
+        "Tanjiro Kamado": ["tanjiro", "demon slayer", "kamado"],
+        "Senku Ishigami": ["senku", "dr stone", "ishigami"],
+        Denji: ["denji", "chainsaw man"],
+      }
+
+      Object.entries(characterMap).forEach(([character, keywords]) => {
+        if (keywords.some((keyword) => searchText.includes(keyword))) {
+          characters.push(character)
+        }
+      })
+
+      if (characters.length === 0) {
+        characters.push("General")
+      }
+
+      const creators = [...(book.author_name || []), ...(book.person || [])].filter(Boolean)
+
       return {
         id: book.key?.replace("/works/", "") || `book-${index}`,
         title: cleanTitle,
@@ -47,9 +108,54 @@ export function useComics(): UseComicsReturn {
         description: "A captivating story with beautiful artwork and engaging narrative.",
         publishDate: book.first_publish_year?.toString() || "Unknown",
         publisher,
+        characters,
+        creators: creators.length > 0 ? creators : [book.author_name?.[0] || "Unknown Creator"],
       }
     })
   }
+
+  // Filter comics based on current filters
+  const applyFilters = useCallback(() => {
+    let filtered = allComics
+
+    if (filters.character) {
+      filtered = filtered.filter((comic) =>
+        comic.characters?.some((char) => char.toLowerCase().includes(filters.character.toLowerCase())),
+      )
+    }
+
+    if (filters.creator) {
+      filtered = filtered.filter((comic) =>
+        comic.creators?.some((creator) => creator.toLowerCase().includes(filters.creator.toLowerCase())),
+      )
+    }
+
+    setFilteredComics(filtered)
+    setCurrentPage(1) // Reset to first page when filters change
+  }, [allComics, filters])
+
+  // Apply pagination to filtered comics
+  const applyPagination = useCallback(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+    const endIndex = startIndex + ITEMS_PER_PAGE
+    setDisplayedComics(filteredComics.slice(startIndex, endIndex))
+
+    // Update pagination info
+    setPagination({
+      currentPage,
+      totalPages: Math.max(1, Math.ceil(filteredComics.length / ITEMS_PER_PAGE)),
+      itemsPerPage: ITEMS_PER_PAGE,
+      totalItems: filteredComics.length,
+    })
+  }, [filteredComics, currentPage])
+
+  const handleFilterChange = useCallback((newFilters: FilterOptions) => {
+    setFilters(newFilters)
+  }, [])
+
+  const handlePageChange = useCallback((page: number) => {
+    setCurrentPage(page)
+  }, [])
 
   useEffect(() => {
     const fetchComics = async () => {
@@ -57,15 +163,17 @@ export function useComics(): UseComicsReturn {
         const response = await fetch("/api/comics", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ limit: 12 }),
+          body: JSON.stringify({ limit: 50 }),
         })
 
         const result: ApiResponse = await response.json()
 
         if (result.success && result.data?.length > 0) {
-          setComics(transformData(result.data))
+          const transformedComics = transformData(result.data)
+          setAllComics(transformedComics)
+          setFilteredComics(transformedComics)
         } else {
-          setError("No comics found.")
+          setError("No Viz Media comics found.")
         }
       } catch (err) {
         setError("Failed to load comics.")
@@ -77,5 +185,27 @@ export function useComics(): UseComicsReturn {
     fetchComics()
   }, [])
 
-  return { comics, loading, error }
+  // Apply filters when allComics or filters change
+  useEffect(() => {
+    if (allComics.length > 0) {
+      applyFilters()
+    }
+  }, [allComics, filters, applyFilters])
+
+  // Apply pagination when filteredComics or currentPage changes
+  useEffect(() => {
+    applyPagination()
+  }, [filteredComics, currentPage, applyPagination])
+
+  return {
+    comics: displayedComics,
+    loading,
+    error,
+    pagination,
+    filters,
+    availableCharacters,
+    availableCreators,
+    handleFilterChange,
+    handlePageChange,
+  }
 }

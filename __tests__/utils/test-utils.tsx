@@ -1,8 +1,0 @@
-import { render, type RenderOptions } from "@testing-library/react"
-import type { ReactElement } from "react"
-
-const customRender = (ui: ReactElement, options?: RenderOptions) => render(ui, options)
-
-export * from "@testing-library/react"
-
-export { customRender as render }

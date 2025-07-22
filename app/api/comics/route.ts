@@ -5,18 +5,27 @@ const OPEN_LIBRARY_BASE_URL = "https://openlibrary.org"
 
 interface SearchResponse {
   docs: OpenLibraryBook[]
+  numFound: number
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse>> {
   try {
-    const { limit = 12 }: { limit?: number } = await request.json()
+    const { limit = 50 }: { limit?: number } = await request.json()
 
-    // multiple search
+    // Enhanced search strategies with more characters and series
     const searches = [
       'publisher:"Viz Media"',
       'publisher:"VIZ Media"',
       "subject:manga",
-      'naruto OR "one piece" OR "death note" OR bleach',
+      'subject:"Japanese comics"',
+      // Popular series searches
+      'naruto OR "one piece" OR "death note" OR bleach OR "dragon ball" OR "attack on titan"',
+      '"demon slayer" OR "chainsaw man" OR "dr stone" OR "fullmetal alchemist"',
+      // Author searches
+      'author:"Masashi Kishimoto" OR author:"Eiichiro Oda" OR author:"Tsugumi Ohba"',
+      'author:"Tite Kubo" OR author:"Akira Toriyama" OR author:"Hajime Isayama"',
+      'author:"Koyoharu Gotouge" OR author:"Tatsuki Fujimoto" OR author:"Riichiro Inagaki"',
+      'author:"Hiromu Arakawa"',
     ]
 
     let allResults: OpenLibraryBook[] = []
@@ -24,8 +33,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
     for (const query of searches) {
       const searchParams = new URLSearchParams({
         q: query,
-        limit: "10",
-        fields: "key,title,author_name,first_publish_year,cover_i,subject,publisher",
+        limit: "15",
+        fields: "key,title,author_name,first_publish_year,cover_i,subject,publisher,person",
         sort: "new",
       })
 
@@ -62,6 +71,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
     return NextResponse.json({
       success: true,
       data: uniqueBooks.slice(0, limit),
+      total: uniqueBooks.length,
     })
   } catch (error) {
     console.error("API Error:", error)
@@ -69,6 +79,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
       success: false,
       error: (error as Error).message,
       data: [],
+      total: 0,
     })
   }
 }

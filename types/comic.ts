@@ -7,6 +7,8 @@ export interface Comic {
   description: string
   publishDate: string
   publisher: string
+  characters?: string[]
+  creators?: string[]
 }
 
 export interface OpenLibraryBook {
@@ -17,10 +19,32 @@ export interface OpenLibraryBook {
   cover_i?: number
   subject?: string[]
   publisher?: string[]
+  person?: string[]
 }
 
 export interface ApiResponse {
   success: boolean
   data: OpenLibraryBook[]
   error?: string
+  total?: number
+}
+
+export interface FilterOptions {
+  character: string
+  creator: string
+}
+
+export interface PaginationInfo {
+  currentPage: number
+  totalPages: number
+  itemsPerPage: number
+  totalItems: number
+}
+
+export interface FavoriteComic {
+  id: string
+  title: string
+  coverImage: string
+  author: string
+  addedAt: string
 }
