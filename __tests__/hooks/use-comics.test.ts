@@ -8,7 +8,7 @@ const mockApiResponse: ApiResponse = {
   data: [
     {
       key: "/works/test1",
-      title: "Test Manga",
+      title: "Test Comic",
       author_name: ["Test Author"],
       first_publish_year: 2023,
       cover_i: 12345,
@@ -37,7 +37,7 @@ describe("useComics Hook", () => {
     })
 
     expect(result.current.comics).toHaveLength(1)
-    expect(result.current.comics[0].title).toBe("Test Manga")
+    expect(result.current.comics[0].title).toBe("Test Comic")
   })
 
   it("handles errors", async () => {

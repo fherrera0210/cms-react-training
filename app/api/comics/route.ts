@@ -34,7 +34,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
       try {
         const response = await fetch(url, {
           headers: {
-            "User-Agent": "Comic Collection App",
+            "User-Agent": "Manga Collection App",
             Accept: "application/json",
           },
         })

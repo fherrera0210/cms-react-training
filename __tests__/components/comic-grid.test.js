@@ -45,8 +45,8 @@ describe("ComicGrid Component", () => {
 
     render(<ComicGrid onBuy={jest.fn()} />)
 
-    expect(screen.getByText("Viz Media Collection")).toBeInTheDocument()
-    expect(screen.getByText("Loading amazing manga and comics from Viz Media...")).toBeInTheDocument()
+    expect(screen.getByText("Manga Collection")).toBeInTheDocument()
+    expect(screen.getByText("Loading amazing titles...")).toBeInTheDocument()
 
     const skeletonCards = screen.getAllByTestId(/loading-card/i)
     expect(skeletonCards).toHaveLength(6)
@@ -77,7 +77,7 @@ describe("ComicGrid Component", () => {
 
     expect(screen.getByText("No Comics Found")).toBeInTheDocument()
     expect(
-      screen.getByText("We couldn't find any Viz Media comics at the moment. Please try again later."),
+      screen.getByText("We couldn't find any titles at the moment. Please try again later."),
     ).toBeInTheDocument()
     expect(screen.getByText("Refresh")).toBeInTheDocument()
   })
@@ -91,7 +91,7 @@ describe("ComicGrid Component", () => {
 
     render(<ComicGrid onBuy={jest.fn()} />)
 
-    expect(screen.getByText("Viz Media Collection")).toBeInTheDocument()
+    expect(screen.getByText("Manga Collection")).toBeInTheDocument()
     expect(screen.getByText("Found 2 comics")).toBeInTheDocument()
     expect(screen.getByText("Test Comic 1")).toBeInTheDocument()
     expect(screen.getByText("Test Comic 2")).toBeInTheDocument()

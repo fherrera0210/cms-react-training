@@ -22,7 +22,7 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
       <div className={styles.container}>
         <header className={styles.header}>
           <h1>Manga Collection</h1>
-          <p>Loading amazing manga...</p>
+          <p>Loading amazing titles...</p>
         </header>
         <div className={styles.grid}>
           {Array.from({ length: 6 }).map((_, index) => (
@@ -55,7 +55,7 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
           <h1>Manga Collection</h1>
         </header>
         <div className={styles.error}>
-          <h2>No Comics Found :(</h2>
+          <h2>No Titles Found :(</h2>
           <p>We couldn't find any titles at the moment. Please try again later.</p>
           <button onClick={() => window.location.reload()}>Refresh</button>
         </div>
@@ -69,7 +69,7 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
         <h1>Manga Collection</h1>
         <p>Discover incredible titles!</p>
         <span className={styles.count}>
-          Found {comics.length} comic{comics.length === 1 ? "" : "s"}
+          Found {comics.length} title{comics.length === 1 ? "" : "s"}
         </span>
       </header>
 
