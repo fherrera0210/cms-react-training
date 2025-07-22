@@ -2,7 +2,6 @@ import { POST } from "@/app/api/comics/route"
 import { NextRequest } from "next/server"
 import jest from "jest"
 
-// Mock fetch
 global.fetch = jest.fn()
 
 describe("/api/comics", () => {

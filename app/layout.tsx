@@ -6,9 +6,8 @@ import "./globals.css"
 const geist = Geist({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Viz Media Collection",
-  description: "Discover incredible manga from Viz Media",
-    generator: 'v0.dev'
+  title: "Manga Collection",
+  description: "Discover incredible titles"
 }
 
 export default function RootLayout({

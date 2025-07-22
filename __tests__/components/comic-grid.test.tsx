@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react"
 import { ComicGrid } from "@/components/comic/comic-grid"
 import type { Comic } from "@/types/comic"
-import jest from "jest" // Declare the jest variable
+import jest from "jest"
 
-// Mock the useComics hook
 jest.mock("@/hooks/use-comics", () => ({
   useComics: jest.fn(),
 }))
@@ -50,7 +49,6 @@ describe("ComicGrid Component", () => {
     expect(screen.getByText("Viz Media Collection")).toBeInTheDocument()
     expect(screen.getByText("Loading amazing manga and comics from Viz Media...")).toBeInTheDocument()
 
-    // Should show 6 loading skeleton cards
     const skeletonCards = screen.getAllByTestId(/loading-card/i)
     expect(skeletonCards).toHaveLength(6)
   })

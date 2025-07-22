@@ -16,7 +16,7 @@ export function useComics(): UseComicsReturn {
 
   const transformData = (books: OpenLibraryBook[]): Comic[] => {
     return books.map((book, index) => {
-      // Clean title
+      
       const cleanTitle =
         book.title
           ?.replace(/,?\s*vol\.?\s*\d+/i, "")
@@ -65,7 +65,7 @@ export function useComics(): UseComicsReturn {
         if (result.success && result.data?.length > 0) {
           setComics(transformData(result.data))
         } else {
-          setError("No Viz Media comics found.")
+          setError("No comics found.")
         }
       } catch (err) {
         setError("Failed to load comics.")

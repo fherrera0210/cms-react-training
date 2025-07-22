@@ -11,7 +11,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
   try {
     const { limit = 12 }: { limit?: number } = await request.json()
 
-    // Try multiple search strategies
+    // multiple search
     const searches = [
       'publisher:"Viz Media"',
       'publisher:"VIZ Media"',

@@ -4,7 +4,6 @@ import { render, screen } from "@testing-library/react"
 import Page from "@/app/page"
 import jest from "jest"
 
-// Mock the ComicGrid component
 jest.mock("@/components/comic/comic-grid", () => ({
   ComicGrid: ({ onBuy }) => (
     <div data-testid="comic-grid">
@@ -13,7 +12,6 @@ jest.mock("@/components/comic/comic-grid", () => ({
   ),
 }))
 
-// Mock window.alert
 global.alert = jest.fn()
 
 describe("Page Component", () => {

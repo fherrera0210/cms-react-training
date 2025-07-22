@@ -21,8 +21,8 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
     return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1>Viz Media Collection</h1>
-          <p>Loading amazing manga and comics from Viz Media...</p>
+          <h1>Manga Collection</h1>
+          <p>Loading amazing manga...</p>
         </header>
         <div className={styles.grid}>
           {Array.from({ length: 6 }).map((_, index) => (
@@ -37,10 +37,10 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
     return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1>Viz Media Collection</h1>
+          <h1>Manga Collection</h1>
         </header>
         <div className={styles.error}>
-          <h2>Unable to Load Comics</h2>
+          <h2>Unable to load titles</h2>
           <p>{error}</p>
           <button onClick={() => window.location.reload()}>Try Again</button>
         </div>
@@ -52,11 +52,11 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
     return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1>Viz Media Collection</h1>
+          <h1>Manga Collection</h1>
         </header>
         <div className={styles.error}>
-          <h2>No Comics Found</h2>
-          <p>We couldn't find any Viz Media comics at the moment. Please try again later.</p>
+          <h2>No Comics Found :(</h2>
+          <p>We couldn't find any titles at the moment. Please try again later.</p>
           <button onClick={() => window.location.reload()}>Refresh</button>
         </div>
       </div>
@@ -66,8 +66,8 @@ export function ComicGrid({ onBuy }: ComicGridProps) {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Viz Media Collection</h1>
-        <p>Discover incredible manga from Viz Media</p>
+        <h1>Manga Collection</h1>
+        <p>Discover incredible titles!</p>
         <span className={styles.count}>
           Found {comics.length} comic{comics.length === 1 ? "" : "s"}
         </span>
